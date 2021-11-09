@@ -4,18 +4,61 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <!--linking css--> 
+    <link rel = "stylesheet" href = "./assets/css/style.css">
     <title>Weather Dashboard</title>
 </head>
 <body>
+
     <!--Div for page header-->
-    <header id = "header"></header>
+    <header class = "header">
+        <h1>Weather Dashboard</h1>
+    </header>
+
     <!--Div for search section-->
-    <div id = "searchbox"></div>
+    <div class = "container">
+        <div class = "searchbox">
+            <div class = "row">
+                <h1>Enter a City</h1>
+            </div>
+            <div class = "row">
+                <input type = "text" class = "searchInput" placeholder = "Citrus Heights">
+                <button type = "submit" class = "searchBtn">
+                    <i class = "fas fa-search"></i>
+                </button>
+            </div>
+            <div class = "previousSearch"></div>
+        </div>
     <!--Div for current city/current day info-->
-    <div id = "currentday"></div>
+        <div class = "col-two-container">
+            <div class = "forecast">
+                <div class = "row">
+                    <h2 class = "cityName">City Name</h2>
+                    <h2 class = "currentDate"></h2>
+                    <img class = "weatherIcon"></img>
+                </div>
+                <div class = "row">
+                    <p class = "temp">Temperature</p>
+                </div>
+                <div class = "row">
+                    <p class = "humidity">Humidity</p>
+                </div>
+                <div class = "row">
+                    <p class = "windSpeed">Wind Speed</p>
+                </div>
+                <div class = "row">
+                    <p class = "uvIndex">UV Index</p>
+                </div>
+            </div>
     <!--Div for 5 day forcast-->
-    <div id = "fiveday"></div>
-    <!--Div for page footer-->
-    <footer id = "footer"></footer>
+            <div class = "five-day-container">
+                <h2>5-Day Forecast:</h2>
+                <div class ="card-row"></div>
+            </div>
+        </div>
+    </div>
+
 </body>
+<!-- Link to JS-->
+<script src = "./assets/js/script.js"></script>
 </html>
