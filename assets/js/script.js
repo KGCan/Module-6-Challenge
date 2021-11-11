@@ -1,20 +1,21 @@
+// API & search variables
 let apiKey = "47f6ef336cb663bb12eeb67f27d78f6a";
 let searchBtn = $(".searchBtn");
-let searchInput = $(".searchInput");
+let searchValue = $(".searchValue");
 
-// define main variables
+// define current day variables
 let cityNameEl = $(".cityName");
 let currentDateEl = $(".currentDate");
 let weatherIconEl = $(".weatherIcon");
 let searchHistoryEl = $(".historyItems");
 
-// define card variables
+// define five day forecast card variables
 let tempEl = $(".temp");
 let humidityEl = $(".humidity");
 let windSpeedEl = $(".windSpeed");
 let cardRow = $(".card-row");
 
-// variable for current date
+// pull current date value
 var today = new Date();
 let dd = String(today.getDate()).padStart(2, '0');
 let mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -24,12 +25,12 @@ var today = mm + '/' + dd + '/' + yyyy;
 //activate event listener for search button
 searchBtn.on("click", function(e) {
     e.preventDefault();
-    if (searchInput.val() === "") {
-        alert("You must enter a city");
+    if (searchValue.val() === "") {
+        alert("Please enter a city");
         return;
     }
     console.log("clicked button")
-    getWeather(searchInput.val());
+    getWeather(searchValue.val());
 });
 
 $(document).on("click", ".historyEntry", function() {
@@ -99,10 +100,6 @@ function getWeather(desiredCity) {
                 let renderedWeatherIcon = `https:///openweathermap.org/img/w/${cityObj.cityWeatherIconName}.png`;
                 renderWeatherData(cityObj.cityName, cityObj.cityTemp, cityObj.cityHumidity, cityObj.cityWindSpeed, renderedWeatherIcon);
                 renderSearchHistory(cityObj.cityName);
-            }else{
-                console.log("City already in searchHistory. Not adding to history list")
-                let renderedWeatherIcon = `https:///openweathermap.org/img/w/${cityObj.cityWeatherIconName}.png`;
-                renderWeatherData(cityObj.cityName, cityObj.cityTemp, cityObj.cityHumidity, cityObj.cityWindSpeed, renderedWeatherIcon);
             }
         }
     })
