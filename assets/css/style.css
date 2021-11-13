@@ -77,6 +77,7 @@ input {
     min-width: 640px;
     padding: 12px 15px 15px 15px;
     height: 40%;
+    background-color: #3498db;
 }
 
 
@@ -129,6 +130,47 @@ img {
 input {
     height: 40px;
     width: auto;
+}
+li:hover {
+    background-color: pink;
+}
+
+li:first-child:hover {
+    background-color: pink;
+}
+
+li:last-child:hover {
+    background-color: pink;
+}
+
+li:first-child {
+    height: 100%;
+    font-size: larger;
+    background-color: rgb(132, 236, 172);
+    border: solid 1px #cecfd2;
+    border-radius: 6px 6px 0px 0px;
+    padding: 12px 5px 12px 15px;
+    list-style: none;
+}
+
+li {
+    height: 100%;
+    font-size: larger;
+    background-color: rgb(132, 236, 172);
+    border: solid 1px #cecfd2;
+    border-radius: 0px 0px 0px 0px;
+    padding: 12px 5px 12px 15px;
+    list-style: none;
+}
+
+li:last-child {
+    height: 100%;
+    font-size: larger;
+    background-color: rgb(132, 236, 172);
+    border: solid 1px #cecfd2;
+    border-radius: 0px 0px 6px 6px;
+    padding: 12px 5px 12px 15px;
+    list-style: none;
 }
 
 .row {
