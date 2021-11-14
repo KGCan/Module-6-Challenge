@@ -36,7 +36,7 @@ https://kgcan.github.io/Module-6-Challenge/
 
 # Screenshot:
 
-
+![Screenshot 2021-11-13 162624](https://user-images.githubusercontent.com/88002224/141663082-c2152124-261b-4526-8313-ad153d9f5dc0.png)
 
  ## Resources Used to complete the project:
 
