@@ -147,7 +147,7 @@ li:last-child:hover {
 li:first-child {
     height: 100%;
     font-size: larger;
-    background-color: rgb(132, 236, 172);
+    background-color: #3caf3c;
     border: solid 1px #cecfd2;
     border-radius: 6px 6px 0px 0px;
     padding: 12px 5px 12px 15px;
@@ -157,7 +157,7 @@ li:first-child {
 li {
     height: 100%;
     font-size: larger;
-    background-color: rgb(132, 236, 172);
+    background-color: #3caf3c;
     border: solid 1px #cecfd2;
     border-radius: 0px 0px 0px 0px;
     padding: 12px 5px 12px 15px;
@@ -167,7 +167,7 @@ li {
 li:last-child {
     height: 100%;
     font-size: larger;
-    background-color: rgb(132, 236, 172);
+    background-color: #3caf3c;
     border: solid 1px #cecfd2;
     border-radius: 0px 0px 6px 6px;
     padding: 12px 5px 12px 15px;
