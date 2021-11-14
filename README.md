@@ -28,11 +28,11 @@
 
 # GitHub Repository URL:
 
-
+https://github.com/KGCan/Module-6-Challenge.git
 
 # Website URL:
 
-
+https://kgcan.github.io/Module-6-Challenge/
 
 # Screenshot:
 
