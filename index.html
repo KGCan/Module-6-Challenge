@@ -20,23 +20,46 @@
     <header class = "pageHeader">
         <h1>How's the Weather?</h1>
     </header>
+
     <!--Main body section-->
     <div class = "searchBox">
-    <h2>Enter city name:</h2>
-    <form id="searchBox" class = "searchForm">
-        <div>
-            <input/>
+        <div class = "searchField">
+            <div class = "set">
+                <h2>Enter City Name:</h2>
+            </div>
+            <div class = "set">
+                <input type = "data" class = "fieldInput" placeholder = "type city name here">
+                <button type = "submit" class = "searchButton">Search</button>
+            </div>
         </div>
-        <div>
-            <button type = "submit">
-                Search
-            </button>
-        </div>
-    </form>
     </div>
-    <div>city search data goes here</div>
-    <div>searched city five day forecast cards go here</div>
+
+    <!-- Search history section-->
+    <div class = "searchList" id = "searchHistory"></div>
+
+    <!-- Data from city search input section-->
+    <div class = "col-two-container">
+        <div class = "currentForecast">
+            <div class = "set">
+                <h2 class = "currentCity">City Name</h2>
+                <h2 class = "currentDate"></h2>
+                <img class = "weatherIcon"></img>
+            </div>
+            <div class = "set">
+                <p class = "temperature">Tempurature:</p>
+                <p class = "humidity">Humidity:</p>
+                <p class = "wind">Wind:</p>
+                <p class = "uvIndex">UV Index:</p>
+            </div>
+        </div>
+    </div>
+
+    <div class = "extendedForecast">
+        <h2>Extended Forecast:</h2>
+        <div class = "cards"></div>
+    </div>
 </body>
+
 <!--link to js-->
 <script src="./assets/js/script.js"></script>
 </html>
