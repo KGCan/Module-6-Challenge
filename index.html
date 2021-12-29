@@ -7,16 +7,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Link to CSS styling-->
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <!--Link to jquery styling-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+    <!--Link to fontawesome-->
+    <script src="https://kit.fontawesome.com/80833262c1.js" crossorigin="anonymous"></script>
+<!--Page title-->
     <title>Weather Dashboard</title>
 </head>
 
 <body>
-    <header>
+    <!--Header section-->
+    <header class = "pageHeader">
         <h1>How's the Weather?</h1>
     </header>
-    <div>
+    <!--Main body section-->
+    <div class = "searchBox">
     <h2>Enter city name:</h2>
-    <form id="searchBox"></form>
+    <form id="searchBox" class = "searchForm">
+        <div>
+            <input/>
+        </div>
+        <div>
+            <button type = "submit">
+                Search
+            </button>
+        </div>
+    </form>
     </div>
     <div>city search data goes here</div>
     <div>searched city five day forecast cards go here</div>
