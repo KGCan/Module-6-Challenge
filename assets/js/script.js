@@ -39,11 +39,23 @@ for (var i = previousSearch.length - 1; i >= 0; i--) {
     prevSearchButton.setAttribute('type', 'button');
     prevSearchButton.classList.add('previous-button', 'button-previous');
 
-    //searchData allows the user to see the 
+    //searchData allows the user to see the data from the data from a search
     prevSearchButton.setAttribute('searchData', previousSearch[i]);
     prevSearchButton.textContent = previousSearch[i];
     searchList.append(prevSearchButton);
   }
 }
 
-//following at line 35 on other page
+//update the previous search history in local storage then updates the previous history portion of th epage
+function addPreviousSearch(search) {
+  //if there is no search term return the function
+  if (previousSearch.indexOf(search) !== -1)
+  {return;}
+  previousSearch.push(search);
+
+  localStorage.setItem('previous-search', JSON.stringify(previousSearch)); 
+  showPreviousSearch();
+}
+
+
+
