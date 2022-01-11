@@ -1,8 +1,5 @@
-//API variable
-var weatherApiLink = 'https://api.openweathermap.org';
-
 //API Key from Openweathermap (had a new one generated as I am starting fresh)
-var apiKey = "e64f1bbcc51498c175315a53f4e40804";
+const apiKey = "e64f1bbcc51498c175315a53f4e40804";
 
 //Variables for list of previously searched cities
 var previousSearch = [];
@@ -34,7 +31,7 @@ var date = month + '/' + day + '/' + year;
 var extendedForecast = document.querySelector("extendedForecast");
 
 //Function to add event listener to search button
-searchButton.on("click", function(e) {
+(searchButton).on("click", function(e) {
   e.preventDefault();
   if (fieldInput.val() === "") {
     alert("Please enter a city name");
@@ -77,6 +74,7 @@ let searchUrl = `https://api.openweathermap.org/data/2.5/uvi?lat=${data.uv.lat}&
         url: searchUrl,
         method: 'GET'
 })
+});
 
 //function for search list of previously searched cities
 function showPreviousSearch() {
@@ -111,5 +109,5 @@ function pullPreviousSearch() {
   var savedData = localStorage.getItem('previous-search');
   if (savedData) {
     previousSearch = JSON.parse(savedData);
-  }
+  }}
   pullPreviousSearch()}
