@@ -1,3 +1,6 @@
+//API variable
+var weatherApiLink = 'https://api.openweathermap.org';
+
 //API Key from Openweathermap (had a new one generated as I am starting fresh)
 const apiKey = "e64f1bbcc51498c175315a53f4e40804";
 
@@ -30,9 +33,12 @@ var date = month + '/' + day + '/' + year;
 //Variable for extended forecast
 var extendedForecast = document.querySelector("extendedForecast");
 
+
+//SEARCH BUTTON FUNCTIONALITY
+
 //Function to add event listener to search button
-(searchButton).on("click", function(e) {
-  e.preventDefault();
+$('searchButton').on('click', function(event) {
+  event.preventDefault();
   if (fieldInput.val() === "") {
     alert("Please enter a city name");
     return;
@@ -42,39 +48,48 @@ var extendedForecast = document.querySelector("extendedForecast");
   pullWeather(fieldInput.val());
 })
 
-//Function to show current city weather
-function showCurrentWeather(currentCity, temperature, humidity, wind, uv) {
-  currentCity.text(currentCity)
-  currentDate.text(`(${date})`)
-  temperature.text(`Temperature: ${temperature} °F`);
-  humidity.text(`Humidity: ${humidity}%`);
-  wind.text(`Wind Speed: ${wind}MPH`);
-  uv.text(`UV Index: ${uv}`);
-  weatherIcon.attributes("src", weatherIcon);
+//CURRENT CITY SEARCH DATA FUNCTIONS
+
+//Sets up URL to search OpenWeather API
+function setApiUrl(cityInput) {
+  return `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&APPID=${apiKey}`;
 }
 
-//Pulls entered city data from API
-function pullWeather(cityInput) {
-  let searchUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&APPID=${apiKey}&units=imperial`;
-  $.ajax({
-      url: searchUrl,
-      method: "GET"
-  })
-  .then(function(currentWeatherInfo) {
-      let data = {
-          currentCity: currentWeatherInfo.name,
-          temperature: currentWeatherInfo.main.temp,
-          humidity: currentWeatherInfo.main.humidity,
-          wind: currentWeatherInfo.wind.speed,
-          uv: currentWeatherInfo.coord,
-          weatherIcon: currentWeatherInfo.weather[0].icon
+//UV index color based on the EPA color scale found at http://www.epa.gov/sunsafety/uv-index-scale-0
+function colorUVIndex(uvColor) {
+  if (uvColor < 3) {
+    return 'green';
+  } else if (uvColor >= 3 && uvColor <6) {
+    return 'yellow';
+  } else if (uvColor >= 6 && uvColor < 8) {
+    return 'orange';
+  } else if (uvColor >= 8 && uvColor < 11) {
+    return 'red';
+  } else return 'purple';
 }
-let searchUrl = `https://api.openweathermap.org/data/2.5/uvi?lat=${data.uv.lat}&lon=${data.uv.lon}&APPID=${apiKey}&units=imperial`
-    $.ajax({
-        url: searchUrl,
-        method: 'GET'
-})
+
+function findCurrentWeather(queryURL) {
+  $.ajax({
+    url: queryURL,
+    method: 'GET'
+  }).then(function(currentWeatherInfo) {
+           let data = {
+            currentCity: currentWeatherInfo.name,
+            temperature: currentWeatherInfo.main.temp,
+            humidity: currentWeatherInfo.main.humidity,
+            wind: currentWeatherInfo.wind.speed,
+            uv: currentWeatherInfo.coord,
+            weatherIcon: currentWeatherInfo.weather[0].icon
+  }
+  let searchUrl = `https://api.openweathermap.org/data/2.5/uvi?lat=${data.uv.lat}&lon=${data.uv.lon}&APPID=${apiKey}&units=imperial`
+      $.ajax({
+      url: searchUrl,
+      method: 'GET'
+ })
 });
+}
+
+//PREVIOUS SEARCH FUNCTIONS
 
 //function for search list of previously searched cities
 function showPreviousSearch() {
@@ -110,4 +125,4 @@ function pullPreviousSearch() {
   if (savedData) {
     previousSearch = JSON.parse(savedData);
   }}
-  pullPreviousSearch()}
+  pullPreviousSearch()
