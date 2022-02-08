@@ -1,24 +1,16 @@
-# Module-6-Challenge
+# Weather Dashboard - Module-6-Challenge
 
-## Create a Weather App by city as requested below:
+## Objective:
 
-* AS A traveler
-* I WANT to see the weather outlook for multiple cities
-* SO THAT I can plan a trip accordingly
+Create a Weather app that a traveler can use to search for multiple cities and view both the current weather and the five-day extended forecast for that city so that they can plan their trip accordingly. 
 
-## Using the following criteria:
+## Goals:
 
-* GIVEN a weather dashboard with form inputs
-* WHEN I search for a city
-* THEN I am presented with current and future conditions for that city and that city is added to the search history
-* WHEN I view current weather conditions for that city
-* THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
-* WHEN I view the UV index
-* THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
-* WHEN I view future weather conditions for that city
-* THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-* WHEN I click on a city in the search history
-* THEN I am again presented with current and future conditions for that city
+* Weather dashboard with form inputs
+* Search for a City by name and see current and extended forecast for that city and the city is added to the search history
+* Current weather conditions show city name, date, an icon representation for those conditions, temperature, humidity, wind speed and UV index that is color coded as favorable, moderate or severe
+* Extended weather conditions show five day forecast with the date, an icon representation for those contidions, temperature, humidity, and wind speed
+* Ability to click city on search history and see current and extended forecast for that city again. 
 
 # Challenge completed using:
 
@@ -36,12 +28,16 @@ https://kgcan.github.io/Module-6-Challenge/
 
 # Screenshot:
 
-![Screenshot 2021-11-13 162624](https://user-images.githubusercontent.com/88002224/141663082-c2152124-261b-4526-8313-ad153d9f5dc0.png)
 
- ## Resources Used to complete the project:
+
+ ## Resources:
 
 * google.com
 * MDN Webdocs
 * openweathermap.org API
-* dhens GitHub account found with google search
+* Module 6 class materials
 * youtube.com
+* https://www.w3schools.com/bootstrap/default.asp
+* https://flourishlib.com/docs/fDate.html
+* 
+
