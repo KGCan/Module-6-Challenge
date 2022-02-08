@@ -6,60 +6,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Link to CSS styling-->
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <!--Link to jquery-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+    <!--Link to Bootstrap CSS-->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
     <!--Link to fontawesome-->
-    <script src="https://kit.fontawesome.com/80833262c1.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Link to JQuery-->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
 <!--Page title-->
     <title>Weather Dashboard</title>
 </head>
 
 <body>
     <!--Header section-->
-    <header class = "pageHeader">
+    <header class = "pageHeader container-fluid mt-2 text-center p-2" style="background-color:#757474; color:whitesmoke;">
         <h1>How's the Weather?</h1>
     </header>
 
     <!--Main body section-->
-    <div class = "searchBox">
-        <div class = "searchField">
-            <div class = "set">
-                <h2>Enter City Name:</h2>
+    <div class = "container">
+        <div class = "row">
+            <div class = "col-sm-4 bg-light">
+                <h2 class = "pt-1">Enter City Name:</h2>
+               
+                <!-- create text box to collect search city input-->
+                <div class = "input-group mb-3">
+                    <input type = "text" class = "form-control" id = "searchInput" area-label = "City Search" aria-describedby = "search-button">
+                    <div class = "input-group-append">
+                        <button class = "btn bg-primary text-light" id = "search-button"><i class = "fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Search history section-->
+                <button class = "btn btn-primary" type = "button" id = "clear-history">Clear Search History</button>
+                <ul class = "list-group"></ul>
             </div>
-            <div class = "set">
-                <input type = "data" class = "fieldInput" placeholder = "type city name here">
-                <button type = "submit" class = "searchButton">Search</button>
+            <!-- Data from city search input section-->
+            <div class = "col-sm-8">
+                <div class = "row ml-2 border border-dark rounded">
+                    <div class = "col-sm-12" id = "currentForecast">
+                        <h3 class = "cityName mb-1 mt-2 bolder" id = "currentCity"></h3>
+                        <p>Temperature:<span class = "current" id = "temperature"></span></p>
+                        <p>Humidity:<span class = "current" id = "humidity"></span></p>
+                        <p>Wind Speed:<span class = "current" id = "wind"></span></p>
+                        <p>UV Index:<span class = "current bg-danger rounded py-2 px-2 text-white" id = "uv"></span></p>
+                    </div>
+                </div>
+            <!-- extended forecast data row-->
+            <div class = "col-sm-12" id = "extendedForecast">
+                <h3>Extended Forecast:</h3>
+                <div class = "row text-light">
+                    <div class = "col-sm-2 bg-primary forecast text-white                             <p id="fDate0"></p>
+                        <p id="fImg0"></p>
+                        <p>Temperature:<span id="fTemp0"></span></p>
+                        <p>Humidity:<span id="fHumidity0"></span></p>
+                    </div>
+                    <div class="col-sm-2 bg-primary forecast text-white ml-2 mb-3 p-2 mt-2 rounded" >
+                        <p id="fDate1"></p>
+                        <p id="fImg1"></p>
+                        <p>Temperature:<span id="fTemp1"></span></p>
+                        <p>Humidity:<span id="fHumidity1"></span></p>
+                    </div>
+                    <div class="col-sm-2 bg-primary forecast text-white ml-2 mb-3 p-2 mt-2 rounded">
+                        <p id="fDate2"></p>
+                        <p id="fImg2"></p>
+                        <p>Temperature:<span id="fTemp2"></span></p>
+                        <p>Humidity:<span id="fHumidity2"></span></p>
+                    </div>
+                    <div class="col-sm-2 bg-primary forecast text-white ml-2 mb-3 p-2 mt-2 rounded">
+                        <p id="fDate3"></p>
+                        <p id="fImg3"></p>
+                        <p>Temperature:<span id="fTemp3"></span></p>
+                        <p>Humidity:<span id="fHumidity3"></span></p>
+                    </div>
+                    <div class="col-sm-2 bg-primary forecast text-white ml-2 mb-3 p-2 mt-2 rounded" >
+                        <p id="fDate4"></p>
+                        <p id="fImg4"></p>
+                        <p>Tempearature:<span id="fTemp4"></span></p>
+                        <p>Humidity:<span id="fHumidity4"></span></p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-
-    <!-- Search history section-->
-    <div class = "searchList" id = "searchHistory"></div>
-
-    <!-- Data from city search input section-->
-    <div>
-        <div class = "currentForecast">
-            <div class = "set">
-                <h2 class = "currentCity">City Name:</h2>
-                <h2 class = "currentDate"></h2>
-                <img class = "weatherIcon"></img>
-            </div>
-            <div class = "set">
-                <p class = "temperature">Tempurature:</p>
-                <p class = "humidity">Humidity:</p>
-                <p class = "wind">Wind:</p>
-                <p class = "uv">UV Index:</p>
-            </div>
-        </div>
-    </div>
-
-    <div class = "extendedForecast">
-        <h2>Extended Forecast:</h2>
-        <div class = "extendedForecast"></div>
-    </div>
-</body>
-
 <!--link to js-->
 <script src="./assets/js/script.js"></script>
 
+</body>
 </html>
