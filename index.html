@@ -29,17 +29,17 @@
             <div class = "col-sm-4 bg-light">
                 <h2 class = "pt-1">Enter City Name:</h2>
                
-                <!-- create text box to collect search city input-->
+                <!-- create text box to collect city search input-->
                 <div class = "input-group mb-3">
                     <input type = "text" class = "form-control" id = "searchInput" area-label = "City Search" aria-describedby = "search-button">
                     <div class = "input-group-append">
-                        <button class = "btn bg-primary text-light" id = "search-button"><i class = "fa fa-search"></i>
+                        <button class = "btn bg-primary text-light" id = "searchButton"><i class = "fa fa-search"></i>
                         </button>
                     </div>
                 </div>
                 
                 <!-- Search history section-->
-                <button class = "btn btn-primary" type = "button" id = "clear-history">Clear Search History</button>
+                <button class = "btn btn-primary" type = "button" id = "clearHistory">Clear Search History</button>
                 <ul class = "list-group"></ul>
             </div>
             <!-- Data from city search input section-->
@@ -57,7 +57,8 @@
             <div class = "col-sm-12" id = "extendedForecast">
                 <h3>Extended Forecast:</h3>
                 <div class = "row text-light">
-                    <div class = "col-sm-2 bg-primary forecast text-white                             <p id="fDate0"></p>
+                    <div class = "col-sm-2 bg-primary forecast text-white">                 
+                        <p id="fDate0"></p>
                         <p id="fImg0"></p>
                         <p>Temperature:<span id="fTemp0"></span></p>
                         <p>Humidity:<span id="fHumidity0"></span></p>

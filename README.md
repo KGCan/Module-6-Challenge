@@ -39,5 +39,5 @@ https://kgcan.github.io/Module-6-Challenge/
 * youtube.com
 * https://www.w3schools.com/bootstrap/default.asp
 * https://flourishlib.com/docs/fDate.html
-* 
+* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
 

@@ -1,30 +1,76 @@
-//API variable
-var weatherApiLink = 'https://api.openweathermap.org';
-
-//API Key from Openweathermap (had a new one generated as I am starting fresh)
+//API variable & API Key from Openweathermap (had new one generated)
+var weatherApiLink = "https://api.openweathermap.org/data/2.5/weather?q=";
 const apiKey = "e64f1bbcc51498c175315a53f4e40804";
 
-//Variables for list of previously searched cities
-var previousSearch = [];
-var searchList = document.querySelector(".searchList");
+//Variables to store searched city information
+var city = "";
 
-//Variable for search button
-var searchButton = document.querySelector(".searchButton");
+// Variables for search data
+var searchInput = $("#searchInput");
+var searchButton = $("#searchButton");
 
-//Variable for search field input
-var fieldInput = document.querySelector(".fieldInput");
+// Variable to clear search history
+var clearHistory = $("#clearHistory");
 
-//Variables for current city data
-var currentCity = document.querySelector(".currentCity");
-var currentDate = document.querySelector(".currentDate");
-var weatherIcon = document.querySelector(".weatherIcon");
-var temperature = document.querySelector(".temperature");
-var humidity = document.querySelector(".humidity");
-var wind = document.querySelector(".wind");
-var uv = document.querySelector(".uv");
+// Serached city variables
+var searchInput = $("#searchInput");
+var currentCity = $("#currentCity");
+var currentTemperature = $("#temperature");
+var currentHumidty= $("#humidity");
+var currentWindSpeed=$("#wind");
+var currentUvindex= $("#uv");
+var searchedCity=[];
+
+// Search storage for city entry
+function find(input){
+  for (var i=0; i<searchedCity.length; i++){
+    if(input.toUpperCase()===searchedCity[i]){
+      return -1;
+    }
+  }
+  return 1;
+}
+
+// Function to display current and extended forecast to the user after pulling input from the search box
+function showWeather(event){
+  event.preventDefault();
+  if(searchInput.val().trim()!==""){
+    city=searchInput.val().trim();
+    findCurrentWeather(city);
+  }
+}
+
+// Create AJAX Call
+function findCurrentWeather(city) {
+  // Build URL to pull data from API
+  var searchURL = weatherApiLink + city + "&APPID=" + apiKey;
+  $.ajax({
+    url: searchURL,
+    method: 'GET'
+  }).then(function(weatherData) {
+        // console log the current weather
+        console.log(weatherData);
+
+        // weather icon from api
+        var weatherIcon = response.weather[0].icon;
+        var iconUrl = "https://openweathermap.org/img/wn/"+weatherIcon +"@2x.png";
+        // pull new date
+        var date = new Date(weatherData.dt*1000).toLocaleDateString();
+        
+        // city name response and weather icon
+        $(currentCity).html(weatherData.name+"("+date+")" + "<img src=" +iconUrl+">");
+
+        // Parse response to display the current temperature and convert that temp to fahreneit
+        var tempFahrenheit = (weatherData.main.temp - 273.15) * 1.80 + 32;
+        $(currentTemperature).html((tempFahrenheit).toFixed(2)+"&#8457"); 
+
+
+
+});
+}
 
 //Variables for current date
-var date = new Date();
+
 var day = String(date.getDate()).padStart(2, '0');
 var month = String(date.getMonth() + 1).padStart(2, '0');
 var year = date.getFullYear();
@@ -68,61 +114,4 @@ function colorUVIndex(uvColor) {
   } else return 'purple';
 }
 
-function findCurrentWeather(queryURL) {
-  $.ajax({
-    url: queryURL,
-    method: 'GET'
-  }).then(function(currentWeatherInfo) {
-           let data = {
-            currentCity: currentWeatherInfo.name,
-            temperature: currentWeatherInfo.main.temp,
-            humidity: currentWeatherInfo.main.humidity,
-            wind: currentWeatherInfo.wind.speed,
-            uv: currentWeatherInfo.coord,
-            weatherIcon: currentWeatherInfo.weather[0].icon
-  }
-  let searchUrl = `https://api.openweathermap.org/data/2.5/uvi?lat=${data.uv.lat}&lon=${data.uv.lon}&APPID=${apiKey}&units=imperial`
-      $.ajax({
-      url: searchUrl,
-      method: 'GET'
- })
-});
-}
 
-//PREVIOUS SEARCH FUNCTIONS
-
-//function for search list of previously searched cities
-function showPreviousSearch() {
-    searchList.innerHTML = '';
-
-//starts at the end of the previous search and counts down to show the most recent item at the top
-for (var i = previousSearch.length - 1; i >= 0; i--) {
-    var prevSearchButton = document.createElement('button');
-    prevSearchButton.setAttribute('type', 'button');
-    prevSearchButton.classList.add('previous-button', 'button-previous');
-
-    //searchData allows the user to see the data from a previous search when clicking on the previous city name in the previous search list
-    prevSearchButton.setAttribute('searchData', previousSearch[i]);
-    prevSearchButton.textContent = previousSearch[i];
-    searchList.append(prevSearchButton);
-  }
-}
-
-//update the previous search history in local storage then updates the previous history portion of the page
-function addPreviousSearch(search) {
-  //if there is no search term return the function
-  if (previousSearch.indexOf(search) !== -1)
-  {return;}
-  previousSearch.push(search);
-
-  localStorage.setItem('previous-search', JSON.stringify(previousSearch)); 
-  showPreviousSearch();
-}
-
-//function to pull previous search history from local storage
-function pullPreviousSearch() {
-  var savedData = localStorage.getItem('previous-search');
-  if (savedData) {
-    previousSearch = JSON.parse(savedData);
-  }}
-  pullPreviousSearch()
