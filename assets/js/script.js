@@ -40,6 +40,18 @@ function showWeather(event){
   }
 }
 
+function setUVIndexColor(uvi) {
+  if (uvi < 3) {
+      return 'green';
+  } else if (uvi >= 3 && uvi < 6) {
+      return 'yellow';
+  } else if (uvi >= 6 && uvi < 8) {
+      return 'orange';
+  } else if (uvi >= 8 && uvi < 11) {
+      return 'red';
+  } else return 'purple';
+}
+
 // Create AJAX Call
 function findCurrentWeather(city) {
   // Build URL to pull data from API
@@ -55,11 +67,12 @@ function findCurrentWeather(city) {
         var weatherIcon = weatherData.weather[0].icon;
         var iconUrl = "https://openweathermap.org/img/wn/"+weatherIcon +"@2x.png";
         // pull new date
-        //**********************************************
+    //**********************************************
         // var date = new Date(weatherData.dt*1000).toLocaleDateString();
-        //**********************************************
+    //**********************************************
         // city name response and weather icon
-        $(currentCity).html(weatherData.name+"("+dt+")" + "<img src=" +iconUrl+">");
+    //**********************************************
+        // $(currentCity).html(weatherData.name+"("+dt+")" + "<img src=" +iconUrl+">");
 
         // Parse response to display the current temperature and convert that temp to fahreneit
         var tempFahrenheit = (weatherData.main.temp - 273.15) * 1.80 + 32;
@@ -104,6 +117,11 @@ function findCurrentWeather(city) {
      url: uvURL,
      method: "GET"
    }).then(function(uvData){
+     let uvIndex = uvData.current.uvi;
+     let uvColor = setUVIndexColor(uvIndex);
+     currentUvindex.text(uvData.current.uvi);
+     currentUvindex.attr("style", `background-color:
+     ${uvColor}; color: ${uvColor === "yellow" ? "black" : "white"}`);
      $(currentUvindex).html(uvData.value);
    });
  }
