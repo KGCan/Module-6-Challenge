@@ -55,63 +55,126 @@ function findCurrentWeather(city) {
         var weatherIcon = response.weather[0].icon;
         var iconUrl = "https://openweathermap.org/img/wn/"+weatherIcon +"@2x.png";
         // pull new date
-        var date = new Date(weatherData.dt*1000).toLocaleDateString();
+        var date = new Date(weatherData.date*1000).toLocaleDateString();
         
         // city name response and weather icon
         $(currentCity).html(weatherData.name+"("+date+")" + "<img src=" +iconUrl+">");
 
         // Parse response to display the current temperature and convert that temp to fahreneit
         var tempFahrenheit = (weatherData.main.temp - 273.15) * 1.80 + 32;
-        $(currentTemperature).html((tempFahrenheit).toFixed(2)+"&#8457"); 
+        $(currentTemperature).html((tempFahrenheit).toFixed(2)+"&#8457");
+        
+        // show humidity
+        $(currentHumidty).html(weatherData.main.humidity+"%");
 
+        // show Wind Speed and convert to MPH
+        var windSpeed = weatherData.wind.speed;
+        var windSpeedMPH = (windSpeed*2.237).toFixed(1);
+        $(currentWindSpeed).html(windSpeedMPH+"MPH");
 
-
+        // Show UV Index using geographic coordinates method and using appid coordinates as a parameter, build uv search url
+        index(weatherData.coord.lon, weatherData.coord.lat);
+        currentForecast(weatherData.id);
+        if(weatherData.cod==200){
+            searchedCity=JSON.parse(localStorage.getItem("cityname"));
+            console.log(searchedCity);
+            if (searchedCity==null){
+                searchedCity=[];
+                searchedCity.push(city.toUpperCase()
+                );
+                localStorage.setItem("cityname",JSON.stringify(searchedCity));
+                addToList(city);
+            }
+            else {
+                if(find(city)>0){
+                    searchedCity.push(city.toUpperCase());
+                    localStorage.setItem("cityname",JSON.stringify(searchedCity));
+                    addToList(city);
+                }
+            }
+        }
 });
 }
 
-//Variables for current date
+// fucntion to return the UV index response
+ function uvIndex(lon, lat){
+   var uvURL = "https://api.openweathermap.org/data/2.5/uvi?appid="+ apiKey+"&lat="+lat+"&lon="+lon;
+   $.ajax({
+     url: uvURL,
+     method: "GET"
+   }).then(function(uvData){
+     $(currentUvindex).html(uvData.value);
+   });
+ }
 
-var day = String(date.getDate()).padStart(2, '0');
-var month = String(date.getMonth() + 1).padStart(2, '0');
-var year = date.getFullYear();
-var date = month + '/' + day + '/' + year;
+ // Show extended forecast for current city
+ function currentForecast(inputID){
+  // var dayover= false;
+  var extendedForecastURL="https://api.openweathermap.org/data/2.5/forecast?id=" + inputID + "&appid="+ apiKey;
+  $.ajax({
+      url:extendedForecastURL,
+      method:"GET"
+  }).then(function(extendedForecast){
+      
+      for (i=0;i<5;i++){
+          var date= new Date((extendedForecast.list[((i+1)*8)-1].date)*1000).toLocaleDateString();
+          var forecastIcon= extendedForecast.list[((i+1)*8)-1].weather[0].icon;
+          var forecastIconUrl = "https://openweathermap.org/img/wn/"+ forecastIcon + ".png";
+          var startTemp= extendedForecast.list[((i+1)*8)-1].main.temp;
+          var tempFahrenheit=(((startTemp-273.5)*1.80)+32).toFixed(2);
+          var humidity= extendedForecast.list[((i+1)*8)-1].main.humidity;
+      
+          $("#forecastDate"+i).html(date);
+          $("#forecastImg"+i).html("<img src="+ forecastIconUrl +">");
+          $("#forecastTemp"+i).html(tempFahrenheit+"&#8457");
+          $("#forecastHumidity"+i).html(humidity+"%");
+      }
+      
+  });
+}
 
-//Variable for extended forecast
-var extendedForecast = document.querySelector("extendedForecast");
+// Add city input to search history list 
+function addToHistory(cityInput){
+  var searchHistory = $("<li>" + cityInput.toUpperCase() + "</li>");
+  $(searchHistory).attr("class", "list-gorup-item");
+  $(searchHistory).attr("data-value", cityInput.toUpperCase());
+  $(".list-group").append(searchHistory);
+}
 
-
-//SEARCH BUTTON FUNCTIONALITY
-
-//Function to add event listener to search button
-$('searchButton').on('click', function(event) {
-  event.preventDefault();
-  if (fieldInput.val() === "") {
-    alert("Please enter a city name");
-    return;
+// Show the forecast for a previously searched city when that city name is clicked on in the search history list
+function pullPreviousSearch(event){
+  var historyItem = event.target;
+  if (event.target.matches("li")){
+    city = historyItem.textContent.trim();
+    findCurrentWeather(City);
   }
-  //console log to confirm button is working
-  console.log("button was clicked")
-  pullWeather(fieldInput.val());
-})
-
-//CURRENT CITY SEARCH DATA FUNCTIONS
-
-//Sets up URL to search OpenWeather API
-function setApiUrl(cityInput) {
-  return `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&APPID=${apiKey}`;
 }
 
-//UV index color based on the EPA color scale found at http://www.epa.gov/sunsafety/uv-index-scale-0
-function colorUVIndex(uvColor) {
-  if (uvColor < 3) {
-    return 'green';
-  } else if (uvColor >= 3 && uvColor <6) {
-    return 'yellow';
-  } else if (uvColor >= 6 && uvColor < 8) {
-    return 'orange';
-  } else if (uvColor >= 8 && uvColor < 11) {
-    return 'red';
-  } else return 'purple';
+// Function to render the data from the previous search
+function showPreviousSearch(){
+  $("ul").empty();
+  var searchedCity = JSON.parse(localStorage.getItem("cityname"));
+  if (searchedCity!==null){
+    searchedCity=JSON.parse(localStorage.getItem("cityname"));
+    for(i=0; i<searchedCity.length;i++){
+      addToList(searchedCity[i]);
+    }
+    city = searchedCity[i-1];
+    findCurrentWeather(city);
+  }
 }
 
+// Clear search history
+function clearSearchHistory(event){
+  event.preventDefault();
+  searchedCity = [];
+  localStorage.removeItem("cityname");
+  document.location.reload();
+}
+
+// event listeners
+$("#searchButton").on("click", showWeather);
+$(document).on("click", pullPreviousSearch);
+$(window).on("load", showPreviousSearch);
+$("#clearHistory").on("click", clearSearchHistory);
 
