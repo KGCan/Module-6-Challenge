@@ -52,13 +52,14 @@ function findCurrentWeather(city) {
         console.log(weatherData);
 
         // weather icon from api
-        var weatherIcon = response.weather[0].icon;
+        var weatherIcon = weatherData.weather[0].icon;
         var iconUrl = "https://openweathermap.org/img/wn/"+weatherIcon +"@2x.png";
         // pull new date
-        var date = new Date(weatherData.date*1000).toLocaleDateString();
-        
+        //**********************************************
+        // var date = new Date(weatherData.dt*1000).toLocaleDateString();
+        //**********************************************
         // city name response and weather icon
-        $(currentCity).html(weatherData.name+"("+date+")" + "<img src=" +iconUrl+">");
+        $(currentCity).html(weatherData.name+"("+dt+")" + "<img src=" +iconUrl+">");
 
         // Parse response to display the current temperature and convert that temp to fahreneit
         var tempFahrenheit = (weatherData.main.temp - 273.15) * 1.80 + 32;
@@ -73,7 +74,7 @@ function findCurrentWeather(city) {
         $(currentWindSpeed).html(windSpeedMPH+"MPH");
 
         // Show UV Index using geographic coordinates method and using appid coordinates as a parameter, build uv search url
-        index(weatherData.coord.lon, weatherData.coord.lat);
+        uvIndex(weatherData.coord.lon, weatherData.coord.lat);
         currentForecast(weatherData.id);
         if(weatherData.cod==200){
             searchedCity=JSON.parse(localStorage.getItem("cityname"));
@@ -83,13 +84,13 @@ function findCurrentWeather(city) {
                 searchedCity.push(city.toUpperCase()
                 );
                 localStorage.setItem("cityname",JSON.stringify(searchedCity));
-                addToList(city);
+                addToHistory(city);
             }
             else {
                 if(find(city)>0){
                     searchedCity.push(city.toUpperCase());
                     localStorage.setItem("cityname",JSON.stringify(searchedCity));
-                    addToList(city);
+                    addToHistory(city);
                 }
             }
         }
@@ -146,7 +147,7 @@ function pullPreviousSearch(event){
   var historyItem = event.target;
   if (event.target.matches("li")){
     city = historyItem.textContent.trim();
-    findCurrentWeather(City);
+    findCurrentWeather(city);
   }
 }
 
@@ -157,7 +158,7 @@ function showPreviousSearch(){
   if (searchedCity!==null){
     searchedCity=JSON.parse(localStorage.getItem("cityname"));
     for(i=0; i<searchedCity.length;i++){
-      addToList(searchedCity[i]);
+      addToHistory(searchedCity[i]);
     }
     city = searchedCity[i-1];
     findCurrentWeather(city);

@@ -19,7 +19,7 @@
 
 <body>
     <!--Header section-->
-    <header class = "pageHeader container-fluid mt-2 text-center p-2" style="background-color:#757474; color:whitesmoke;">
+    <header class = "pageHeader container-fluid mt-2 bg-info text-center p-2" style="color:whitesmoke;">
         <h1>How's the Weather?</h1>
     </header>
 
@@ -33,13 +33,13 @@
                 <div class = "input-group mb-3">
                     <input type = "text" class = "form-control" id = "searchInput" area-label = "City Search" aria-describedby = "search-button">
                     <div class = "input-group-append">
-                        <button class = "btn bg-primary text-light" id = "searchButton"><i class = "fa fa-search"></i>
+                        <button class = "btn bg-info text-light" id = "searchButton"><i class = "fa fa-search"></i>
                         </button>
                     </div>
                 </div>
                 
                 <!-- Search history section-->
-                <button class = "btn btn-primary" type = "button" id = "clearHistory">Clear Search History</button>
+                <button class = "btn btn-info" type = "button" id = "clearHistory">Clear Search History</button>
                 <ul class = "list-group"></ul>
             </div>
             <!-- Data from city search input section-->
@@ -50,38 +50,38 @@
                         <p>Temperature:<span class = "current" id = "temperature"></span></p>
                         <p>Humidity:<span class = "current" id = "humidity"></span></p>
                         <p>Wind Speed:<span class = "current" id = "wind"></span></p>
-                        <p>UV Index:<span class = "current bg-danger rounded py-2 px-2 text-white" id = "uv"></span></p>
+                        <p>UV Index:<span class = "current rounded py-2 px-2 text-white" id = "uv"></span></p>
                     </div>
                 </div>
             <!-- extended forecast data row-->
             <div class = "col-sm-12" id = "extendedForecast">
                 <h3>Extended Forecast:</h3>
                 <div class = "row text-light">
-                    <div class = "col-sm-2 bg-primary forecast text-white">                 
-                        <p id="forecastDate0"></p>
+                    <div class = "col-sm-2 bg-info forecast text-white ml-2 mb-3 p-2 mt-2 rounded">                 
+                        <p id="fDate0"></p>
                         <p id="forecastImg0"></p>
                         <p>Temperature:<span id="forecastTemp0"></span></p>
                         <p>Humidity:<span id="forecastHumidity0"></span></p>
                     </div>
-                    <div class="col-sm-2 bg-primary forecast text-white ml-2 mb-3 p-2 mt-2 rounded" >
+                    <div class="col-sm-2 bg-info forecast text-white ml-2 mb-3 p-2 mt-2 rounded" >
                         <p id="forecastDate1"></p>
                         <p id="forecastImg1"></p>
                         <p>Temperature:<span id="forecastTemp1"></span></p>
                         <p>Humidity:<span id="forecastHumidity1"></span></p>
                     </div>
-                    <div class="col-sm-2 bg-primary forecast text-white ml-2 mb-3 p-2 mt-2 rounded">
+                    <div class="col-sm-2 bg-info forecast text-white ml-2 mb-3 p-2 mt-2 rounded">
                         <p id="forecastDate2"></p>
                         <p id="forecastImg2"></p>
                         <p>Temperature:<span id="forecastTemp2"></span></p>
                         <p>Humidity:<span id="forecastHumidity2"></span></p>
                     </div>
-                    <div class="col-sm-2 bg-primary forecast text-white ml-2 mb-3 p-2 mt-2 rounded">
+                    <div class="col-sm-2 bg-info forecast text-white ml-2 mb-3 p-2 mt-2 rounded">
                         <p id="forecastDate3"></p>
                         <p id="forecastImg3"></p>
                         <p>Temperature:<span id="forecastTemp3"></span></p>
                         <p>Humidity:<span id="forecastHumidity3"></span></p>
                     </div>
-                    <div class="col-sm-2 bg-primary forecast text-white ml-2 mb-3 p-2 mt-2 rounded" >
+                    <div class="col-sm-2 bg-info forecast text-white ml-2 mb-3 p-2 mt-2 rounded" >
                         <p id="forecastDate4"></p>
                         <p id="forecastImg4"></p>
                         <p>Tempearature:<span id="forecastTemp4"></span></p>
