@@ -21,6 +21,13 @@ var currentWindSpeed=$("#wind");
 var currentUvindex= $("#uv");
 var searchedCity=[];
 
+// get current date value
+var today = new Date();
+let day = String(today.getDate()).padStart(2, '0');
+let month = String(today.getMonth() + 1).padStart(2, '0');
+let year = today.getYear();
+var today = month + '/' + day + '/' + year;
+
 // Search storage for city entry
 function find(input){
   for (var i=0; i<searchedCity.length; i++){
@@ -117,11 +124,11 @@ function findCurrentWeather(city) {
      url: uvURL,
      method: "GET"
    }).then(function(uvData){
-     let uvIndex = uvData.current.uvi;
-     let uvColor = setUVIndexColor(uvIndex);
-     currentUvindex.text(uvData.current.uvi);
-     currentUvindex.attr("style", `background-color:
-     ${uvColor}; color: ${uvColor === "yellow" ? "black" : "white"}`);
+    //  let uvIndex = uvData.current.uvi;
+    //  let uvColor = setUVIndexColor(uvIndex);
+    //  currentUvindex.text(uvData.current.uvi);
+    //  currentUvindex.attr("style", `background-color:
+    //  ${uvColor}; color: ${uvColor === "yellow" ? "black" : "white"}`);
      $(currentUvindex).html(uvData.value);
    });
  }
