@@ -26,20 +26,31 @@
     <!--Main body section-->
     <div class = "container">
         <div class = "row">
-            <div class = "col-sm-4 bg-light">
+            <div class = "col-sm-2.25 bg-light">
                 <h2 class = "pt-1">Enter City Name:</h2>
                
                 <!-- create text box to collect city search input-->
                 <div class = "input-group mb-3">
-                    <input type = "text" class = "form-control" id = "searchInput" area-label = "City Search" aria-describedby = "search-button">
+                    <input 
+                    type = "text" 
+                    class = "form-control" 
+                    id = "searchInput" 
+                    placeholder = "Enter city name here"
+                    aria-label = "City Search" aria-describedby = "search-button">
                     <div class = "input-group-append">
-                        <button class = "btn bg-info text-light" id = "searchButton"><i class = "fa fa-search"></i>
+                        <button 
+                        class = "btn bg-info text-light" 
+                        id = "searchButton">
+                        <i class = "fa fa-search"></i>
                         </button>
                     </div>
                 </div>
                 
                 <!-- Search history section-->
-                <button class = "btn btn-info" type = "button" id = "clearHistory">Clear Search History</button>
+                <button 
+                class = "btn btn-info" 
+                type = "button" 
+                id = "clearHistory">Clear Search History</button>
                 <ul class = "list-group"></ul>
             </div>
             <!-- Data from city search input section-->
@@ -57,31 +68,31 @@
             <div class = "col-sm-12" id = "extendedForecast">
                 <h3>Extended Forecast:</h3>
                 <div class = "row text-light">
-                    <div class = "col-sm-2 bg-info forecast text-white ml-2 mb-3 p-2 mt-2 rounded">                 
+                    <div class = "col-sm-2.25 bg-info forecast text-white ml-2 mb-3 p-2 mt-2 rounded">                 
                         <p id="fDate0"></p>
                         <p id="forecastImg0"></p>
                         <p>Temperature:<span id="forecastTemp0"></span></p>
                         <p>Humidity:<span id="forecastHumidity0"></span></p>
                     </div>
-                    <div class="col-sm-2 bg-info forecast text-white ml-2 mb-3 p-2 mt-2 rounded" >
+                    <div class="col-sm-2.25 bg-info forecast text-white ml-2 mb-3 p-2 mt-2 rounded" >
                         <p id="fDate1"></p>
                         <p id="forecastImg1"></p>
                         <p>Temperature:<span id="forecastTemp1"></span></p>
                         <p>Humidity:<span id="forecastHumidity1"></span></p>
                     </div>
-                    <div class="col-sm-2 bg-info forecast text-white ml-2 mb-3 p-2 mt-2 rounded">
+                    <div class="col-sm-2.25 bg-info forecast text-white ml-2 mb-3 p-2 mt-2 rounded">
                         <p id="fDate2"></p>
                         <p id="forecastImg2"></p>
                         <p>Temperature:<span id="forecastTemp2"></span></p>
                         <p>Humidity:<span id="forecastHumidity2"></span></p>
                     </div>
-                    <div class="col-sm-2 bg-info forecast text-white ml-2 mb-3 p-2 mt-2 rounded">
+                    <div class="col-sm-2.25 bg-info forecast text-white ml-2 mb-3 p-2 mt-2 rounded">
                         <p id="fDate3"></p>
                         <p id="forecastImg3"></p>
                         <p>Temperature:<span id="forecastTemp3"></span></p>
                         <p>Humidity:<span id="forecastHumidity3"></span></p>
                     </div>
-                    <div class="col-sm-2 bg-info forecast text-white ml-2 mb-3 p-2 mt-2 rounded" >
+                    <div class="col-sm-2.25 bg-info forecast text-white ml-2 mb-3 p-2 mt-2 rounded" >
                         <p id="fDate4"></p>
                         <p id="forecastImg4"></p>
                         <p>Tempearature:<span id="forecastTemp4"></span></p>
