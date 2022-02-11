@@ -74,12 +74,9 @@ function findCurrentWeather(city) {
         var weatherIcon = weatherData.weather[0].icon;
         var iconUrl = "https://openweathermap.org/img/wn/"+weatherIcon +"@2x.png";
         // pull new date
-    //**********************************************
-        // var date = new Date(weatherData.dt*1000).toLocaleDateString();
-    //**********************************************
+        var date = new Date(weatherData.dt*1000).toLocaleDateString();
         // city name response and weather icon
-    //**********************************************
-        // $(currentCity).html(weatherData.name+"("+dt+")" + "<img src=" +iconUrl+">");
+        $(currentCity).html(weatherData.name + "("+date+")" + "<img src=" +iconUrl+">");
 
         // Parse response to display the current temperature and convert that temp to fahreneit
         var tempFahrenheit = (weatherData.main.temp - 273.15) * 1.80 + 32;
@@ -150,7 +147,7 @@ function findCurrentWeather(city) {
           var tempFahrenheit=(((startTemp-273.5)*1.80)+32).toFixed(2);
           var humidity= extendedForecast.list[((i+1)*8)-1].main.humidity;
       
-          $("#forecastDate"+i).html(date);
+          $("#fDate"+i).html(date);
           $("#forecastImg"+i).html("<img src="+ forecastIconUrl +">");
           $("#forecastTemp"+i).html(tempFahrenheit+"&#8457");
           $("#forecastHumidity"+i).html(humidity+"%");
