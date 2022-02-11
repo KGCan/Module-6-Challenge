@@ -140,7 +140,7 @@ function findCurrentWeather(city) {
   }).then(function(extendedForecast){
       
       for (i=0;i<5;i++){
-          var date= new Date((extendedForecast.list[((i+1)*8)-1].date)*1000).toLocaleDateString();
+          var date= new Date((extendedForecast.list[((i+1)*8)-1].dt)*1000).toLocaleDateString();
           var forecastIcon= extendedForecast.list[((i+1)*8)-1].weather[0].icon;
           var forecastIconUrl = "https://openweathermap.org/img/wn/"+ forecastIcon + ".png";
           var startTemp= extendedForecast.list[((i+1)*8)-1].main.temp;
