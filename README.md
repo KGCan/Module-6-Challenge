@@ -40,4 +40,5 @@ https://kgcan.github.io/Module-6-Challenge/
 * https://www.w3schools.com/bootstrap/default.asp
 * https://flourishlib.com/docs/fDate.html
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
+* https://stackoverflow.com/questions/28750907/how-to-customize-bootstrap-column-widths#:~:text=In%20general%20you%20want%20to,you%20define%20new%20column%20widths.&text=For%20a%2012%20columns%20grid,%25)%20to%20each%20column%20width.
 

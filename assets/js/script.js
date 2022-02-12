@@ -18,7 +18,7 @@ var currentCity = $("#currentCity");
 var currentTemperature = $("#temperature");
 var currentHumidty= $("#humidity");
 var currentWindSpeed=$("#wind");
-var currentUvindex= $("#uv");
+var currentUVI= $("#uv");
 var searchedCity=[];
 
 // get current date value
@@ -93,7 +93,7 @@ function findCurrentWeather(city) {
         // Show UV Index using geographic coordinates method and using appid coordinates as a parameter, build uv search url
         uvIndex(weatherData.coord.lon, weatherData.coord.lat);
         currentForecast(weatherData.id);
-        if(weatherData.cod==200){
+        if(weatherData.coord==200){
             searchedCity=JSON.parse(localStorage.getItem("cityname"));
             console.log(searchedCity);
             if (searchedCity==null){
@@ -116,17 +116,12 @@ function findCurrentWeather(city) {
 
 // fucntion to return the UV index response
  function uvIndex(lon, lat){
-   var uvURL = "https://api.openweathermap.org/data/2.5/uvi?appid="+ apiKey+"&lat="+lat+"&lon="+lon;
+   var uvURL = "https://api.openweathermap.org/data/2.5/uvi?appid=" + "&lat="+ lat + "&lon=" + lon + apiKey;
    $.ajax({
      url: uvURL,
      method: "GET"
    }).then(function(uvData){
-    //  let uvIndex = uvData.current.uvi;
-    //  let uvColor = setUVIndexColor(uvIndex);
-    //  currentUvindex.text(uvData.current.uvi);
-    //  currentUvindex.attr("style", `background-color:
-    //  ${uvColor}; color: ${uvColor === "yellow" ? "black" : "white"}`);
-     $(currentUvindex).html(uvData.value);
+     $(currentUVI).html(uvData.value);
    });
  }
 
@@ -159,7 +154,7 @@ function findCurrentWeather(city) {
 // Add city input to search history list 
 function addToHistory(cityInput){
   var searchHistory = $("<li>" + cityInput.toUpperCase() + "</li>");
-  $(searchHistory).attr("class", "list-gorup-item");
+  $(searchHistory).attr("class", "list-group-item list-group-item-success");
   $(searchHistory).attr("data-value", cityInput.toUpperCase());
   $(".list-group").append(searchHistory);
 }
