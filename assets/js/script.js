@@ -93,7 +93,7 @@ function findCurrentWeather(city) {
         // Show UV Index using geographic coordinates method and using appid coordinates as a parameter, build uv search url
         uvIndex(weatherData.coord.lon, weatherData.coord.lat);
         currentForecast(weatherData.id);
-        if(weatherData.coord==200){
+        if(weatherData.cod==200){
             searchedCity=JSON.parse(localStorage.getItem("cityname"));
             console.log(searchedCity);
             if (searchedCity==null){
