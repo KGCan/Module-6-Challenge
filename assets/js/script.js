@@ -115,19 +115,22 @@ function findCurrentWeather(city) {
 }
 
 // fucntion to return the UV index response
- function uvIndex(lon, lat){
-   var uvURL = "https://api.openweathermap.org/data/2.5/uvi?appid=" + "&lat="+ lat + "&lon=" + lon + apiKey;
+let lat = searchedCity.coord.lat;
+let lon = searchedCity.coord.lon;
+let uvURL= `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`;
    $.ajax({
      url: uvURL,
      method: "GET"
    }).then(function(uvData){
-     $(currentUVI).html(uvData.value);
+     let uvI = uvData.current.uvi;
+     let uvColor = setUVIndexColor(uvI);
+     setUVIndexColor.text(uvData.current.uvi);
+     setUVIndexColor.attr("style", `background-color: ${uvColor}; color: ${uvColor === "yellow" ? "black" : "white"}`);
    });
- }
+
 
  // Show extended forecast for current city
  function currentForecast(inputID){
-  // var dayover= false;
   var extendedForecastURL="https://api.openweathermap.org/data/2.5/forecast?id=" + inputID + "&appid="+ apiKey;
   $.ajax({
       url:extendedForecastURL,
@@ -195,4 +198,3 @@ $("#searchButton").on("click", showWeather);
 $(document).on("click", pullPreviousSearch);
 $(window).on("load", showPreviousSearch);
 $("#clearHistory").on("click", clearSearchHistory);
-
