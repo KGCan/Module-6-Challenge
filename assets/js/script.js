@@ -1,5 +1,5 @@
 //API variable & API Key from Openweathermap (had new one generated)
-var weatherApiLink = "https://api.openweathermap.org/data/2.5/weather?q=";
+var weatherApiLink = "https://api.openweathermap.org";
 const apiKey = "e64f1bbcc51498c175315a53f4e40804";
 
 //Variables to store searched city information
@@ -22,11 +22,11 @@ var currentUVI= $("#uv");
 var searchedCity=[];
 
 // get current date value
-var today = new Date();
-let day = String(today.getDate()).padStart(2, '0');
-let month = String(today.getMonth() + 1).padStart(2, '0');
-let year = today.getYear();
-var today = month + '/' + day + '/' + year;
+// var today = new Date();
+// let day = String(today.getDate()).padStart(2, '0');
+// let month = String(today.getMonth() + 1).padStart(2, '0');
+// let year = today.getYear();
+// var today = month + '/' + day + '/' + year;
 
 // Search storage for city entry
 function find(input){
@@ -47,22 +47,22 @@ function showWeather(event){
   }
 }
 
-function setUVIndexColor(uvi) {
-  if (uvi < 3) {
-      return 'green';
-  } else if (uvi >= 3 && uvi < 6) {
-      return 'yellow';
-  } else if (uvi >= 6 && uvi < 8) {
-      return 'orange';
-  } else if (uvi >= 8 && uvi < 11) {
-      return 'red';
-  } else return 'purple';
-}
+// function setUVIndexColor(uvi) {
+//   if (uvi < 3) {
+//       return 'green';
+//   } else if (uvi >= 3 && uvi < 6) {
+//       return 'yellow';
+//   } else if (uvi >= 6 && uvi < 8) {
+//       return 'orange';
+//   } else if (uvi >= 8 && uvi < 11) {
+//       return 'red';
+//   } else return 'purple';
+// }
 
 // Create AJAX Call
 function findCurrentWeather(city) {
   // Build URL to pull data from API
-  var searchURL = weatherApiLink + city + "&APPID=" + apiKey;
+  var searchURL = weatherApiLink + "/data/2.5/weather?q=" + city + "&APPID=" + apiKey;
   $.ajax({
     url: searchURL,
     method: 'GET'
@@ -115,18 +115,15 @@ function findCurrentWeather(city) {
 }
 
 // fucntion to return the UV index response
-let lat = searchedCity.coord.lat;
-let lon = searchedCity.coord.lon;
-let uvURL= `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+function uvIndex(ln,lt){
+  var uvURL="https://api.openweathermap.org/data/2.5/uvi?appid="+ apiKey+"&lat="+lt+"&lon="+ln;
    $.ajax({
      url: uvURL,
      method: "GET"
    }).then(function(uvData){
-     let uvI = uvData.current.uvi;
-     let uvColor = setUVIndexColor(uvI);
-     setUVIndexColor.text(uvData.current.uvi);
-     setUVIndexColor.attr("style", `background-color: ${uvColor}; color: ${uvColor === "yellow" ? "black" : "white"}`);
+    $(currentUVI).html(uvData.value);
    });
+}
 
 
  // Show extended forecast for current city
@@ -197,4 +194,4 @@ function clearSearchHistory(event){
 $("#searchButton").on("click", showWeather);
 $(document).on("click", pullPreviousSearch);
 $(window).on("load", showPreviousSearch);
-$("#clearHistory").on("click", clearSearchHistory);
+$("#clearHistory").on("click", clearSearchHistory)
