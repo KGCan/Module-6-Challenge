@@ -40,21 +40,6 @@ function showWeather(event){
   }
 }
 
-//*****************************************************
-// ONCE UV FUNCTION WORKING INCORPORATE USE SOMETHING SIMILAR TO THIS BLOCK TO SET THE COLOR CODING FOR THE UV INDEX
-// function setUVIndexColor(uvi) {
-//   if (uvi < 3) {
-//       return 'green';
-//   } else if (uvi >= 3 && uvi < 6) {
-//       return 'yellow';
-//   } else if (uvi >= 6 && uvi < 8) {
-//       return 'orange';
-//   } else if (uvi >= 8 && uvi < 11) {
-//       return 'red';
-//   } else return 'purple';
-// }
-//****************************************************
-
 // Create AJAX Call
 function findCurrentWeather(city) {
   // Build URL to pull data from API
