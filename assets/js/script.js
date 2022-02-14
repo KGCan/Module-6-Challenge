@@ -21,13 +21,6 @@ var currentWindSpeed=$("#wind");
 var currentUVI= $("#uv");
 var searchedCity=[];
 
-// get current date value
-// var today = new Date();
-// let day = String(today.getDate()).padStart(2, '0');
-// let month = String(today.getMonth() + 1).padStart(2, '0');
-// let year = today.getYear();
-// var today = month + '/' + day + '/' + year;
-
 // Search storage for city entry
 function find(input){
   for (var i=0; i<searchedCity.length; i++){
@@ -47,6 +40,8 @@ function showWeather(event){
   }
 }
 
+//*****************************************************
+// ONCE UV FUNCTION WORKING INCORPORATE USE SOMETHING SIMILAR TO THIS BLOCK TO SET THE COLOR CODING FOR THE UV INDEX
 // function setUVIndexColor(uvi) {
 //   if (uvi < 3) {
 //       return 'green';
@@ -58,6 +53,7 @@ function showWeather(event){
 //       return 'red';
 //   } else return 'purple';
 // }
+//****************************************************
 
 // Create AJAX Call
 function findCurrentWeather(city) {
@@ -116,7 +112,7 @@ function findCurrentWeather(city) {
 
 // fucntion to return the UV index response
 function uvIndex(ln,lt){
-  var uvURL="https://api.openweathermap.org/data/2.5/uvi?appid="+ apiKey+"&lat="+lt+"&lon="+ln;
+  var uvURL= weatherApiLink + "/data/2.5/uvi?appid="+ apiKey+"&lat="+lt+"&lon="+ln;
    $.ajax({
      url: uvURL,
      method: "GET"
@@ -128,7 +124,7 @@ function uvIndex(ln,lt){
 
  // Show extended forecast for current city
  function currentForecast(inputID){
-  var extendedForecastURL="https://api.openweathermap.org/data/2.5/forecast?id=" + inputID + "&appid="+ apiKey;
+  var extendedForecastURL= weatherApiLink + "/data/2.5/forecast?id=" + inputID + "&appid="+ apiKey;
   $.ajax({
       url:extendedForecastURL,
       method:"GET"
